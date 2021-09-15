@@ -1,0 +1,2 @@
+:root{--black:#111517;--white:#fff;--background:#fafafa}body{font-size:16px;font-family:"Nunito Sans",sans-serif;margin:0;padding:0;background:#fafafa;background:var(--background);min-height:100vh;color:#111517;color:var(--black)}@media screen and (max-width:768px){body{font-size:14px}}
+/*# sourceMappingURL=main.1312738d.chunk.css.map */
