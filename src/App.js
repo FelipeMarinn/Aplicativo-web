@@ -10,7 +10,8 @@ import { store } from './store/store'
 import {
     BrowserRouter as Router,
     Switch,
-    Route
+    Route,
+    Redirect
   } from "react-router-dom";
 
 
@@ -27,6 +28,8 @@ export const App = () => {
                    <Route exact path="/usuarios" component={ Usuarios } />
                    <Route exact path="/albumes" component={ Albumes } />
                    <Route exact path="/publicaciones" component={ Publicaciones } />
+
+                   <Redirect to='/' />
                 </Switch>
             </Router>
         </Provider>    
