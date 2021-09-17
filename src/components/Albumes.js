@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { useFetch } from '../hook/useFetch'
 import styled from 'styled-components'
 
 const AlbumesStyled = styled.div`
@@ -26,21 +27,10 @@ const AlbumesStyled = styled.div`
   }
 `
 
-
 export const Albumes = () => {
 
-    const dispatch = useDispatch()
+    useFetch('albums', 'GET_DATA_ALBUMS')
     const { albumList } = useSelector(state => state.albumsReducer)
-
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/albums')
-          .then(response => response.json())
-          .then(json => dispatch({
-              type: 'GET_DATA_ALBUMS',
-              payload: json
-          }))
-    }, [ dispatch ])
-
 
     return (
         <AlbumesStyled>

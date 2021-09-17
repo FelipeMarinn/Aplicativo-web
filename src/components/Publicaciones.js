@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { Form } from './Form'
 import styled from 'styled-components'
+import { useFetch } from '../hook/useFetch'
 
 const PublicacionesStyled = styled.div` 
   max-width: 1200px;
@@ -21,21 +22,10 @@ const PublicacionesStyled = styled.div`
   }
 `
 
-
 export const Publicaciones = () => {
 
-    const dispatch = useDispatch()
+    useFetch('posts', 'GET_DATA_POSTS')
     const { postList } = useSelector(state => state.postsReducer)
-
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/posts')
-          .then(response => response.json())
-          .then(json => dispatch({
-              type: 'GET_DATA_POSTS',
-              payload: json
-          }))
-    }, [ dispatch ])
-
 
     return (
         <PublicacionesStyled>

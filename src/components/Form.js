@@ -39,7 +39,6 @@ const FormStyled = styled.div`
   }
 `
 
-
 export const Form = () => {
 
     const dispatch = useDispatch()

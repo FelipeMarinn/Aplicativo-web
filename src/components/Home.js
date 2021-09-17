@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { useFetch } from '../hook/useFetch'
 
 const HomeStyled = styled.div`
     max-width: 1000px;
@@ -44,21 +45,10 @@ const HomeStyled = styled.div`
  
 `
 
-
 export const Home = () => {
 
-    const dispatch = useDispatch()
+    useFetch('photos', 'GET_DATA_PHOTOS')
     const { photoList } = useSelector(state => state.homeReducer)
-
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/photos')
-          .then(response => response.json())
-          .then(json => dispatch({
-              type: 'GET_DATA_PHOTOS',
-              payload: json
-          }))
-    }, [ dispatch ])
-
 
     return (
         <HomeStyled>
