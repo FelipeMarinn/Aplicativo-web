@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`se renderiza correctamente 1`] = `
+<div>
+  <h1>
+    Soy un componente
+  </h1>
+</div>
+`;

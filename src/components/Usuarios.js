@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { useFetch } from '../hook/useFetch'
+import { setData } from '../helpers/setData'
 
 const UsuariosStyled = styled.div`
     max-width: 1000px;
@@ -40,12 +40,21 @@ const UsuariosStyled = styled.div`
 export const Usuarios = () => {
 
     const dispatch = useDispatch()
-    useFetch('users', 'GET_DATA_USERS')
-    
+
     const state = useSelector(state => state.reducer)
     const { userList, userByName } = state
     const user = userByName.length > 0 ? userByName : userList
 
+    useEffect(() => {
+
+        setData('users').then( data => dispatch({
+          type: 'GET_DATA_USERS',
+          payload: data
+        }))
+    
+      }, [dispatch])
+
+      
     const handleInputChange = (e) => {
         
         dispatch({

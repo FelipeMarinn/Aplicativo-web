@@ -1,7 +1,7 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { useFetch } from '../hook/useFetch'
+import { setData } from '../helpers/setData'
 
 const HomeStyled = styled.div`
     max-width: 1000px;
@@ -47,8 +47,17 @@ const HomeStyled = styled.div`
 
 export const Home = () => {
 
-    useFetch('photos', 'GET_DATA_PHOTOS')
+    const dispatch = useDispatch()
     const { photoList } = useSelector(state => state.homeReducer)
+
+    useEffect(() => {
+
+      setData('photos').then( data => dispatch({
+        type: 'GET_DATA_PHOTOS',
+        payload: data
+      }))
+  
+    }, [dispatch])
 
     return (
         <HomeStyled>

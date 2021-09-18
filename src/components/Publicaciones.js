@@ -1,8 +1,8 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Form } from './Form'
 import styled from 'styled-components'
-import { useFetch } from '../hook/useFetch'
+import { setData } from '../helpers/setData'
 
 const PublicacionesStyled = styled.div` 
   max-width: 1200px;
@@ -24,8 +24,17 @@ const PublicacionesStyled = styled.div`
 
 export const Publicaciones = () => {
 
-    useFetch('posts', 'GET_DATA_POSTS')
+    const dispatch = useDispatch()
     const { postList } = useSelector(state => state.postsReducer)
+
+    useEffect(() => {
+
+        setData('posts').then( data => dispatch({
+          type: 'GET_DATA_POSTS',
+          payload: data
+        }))
+    
+    }, [dispatch])
 
     return (
         <PublicacionesStyled>

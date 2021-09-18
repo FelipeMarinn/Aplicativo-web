@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { useFetch } from '../hook/useFetch'
 import styled from 'styled-components'
+import { setData } from '../helpers/setData'
 
 const AlbumesStyled = styled.div`
   max-width: 1000px;
@@ -29,8 +30,17 @@ const AlbumesStyled = styled.div`
 
 export const Albumes = () => {
 
-    useFetch('albums', 'GET_DATA_ALBUMS')
+    const dispatch = useDispatch()
     const { albumList } = useSelector(state => state.albumsReducer)
+
+    useEffect(() => {
+
+        setData('albums').then( data => dispatch({
+          type: 'GET_DATA_ALBUMS',
+          payload: data
+        }))
+    
+      }, [dispatch])
 
     return (
         <AlbumesStyled>
@@ -40,7 +50,7 @@ export const Albumes = () => {
                         <div key={ title } className='album-content'>
                             <img src='https://www.tuexpertoapps.com/wp-content/uploads/2017/10/old-1130731_640-600x450.jpg' alt='camara fotografica' width='100%'/>
                             <div className='album-info'>
-                               <p><strong>Id:</strong> { id } </p>
+                               <p className='album-id'><strong>Id:</strong> { id } </p>
                                <p><strong>Title:</strong> { title } </p>
                             </div>
                         </div>
